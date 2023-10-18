@@ -18,10 +18,10 @@
                     <a href="#" class="nav-link">Rewards</a>
                 </li>
                 <li class="navbar-item">
-                    <a href="/register.html" class="nav-link">Sign Up</a>
+                    <a href="{{ route('register') }}" class="nav-link">Sign Up</a>
                 </li>
                 <li class="navbar-item">
-                    <a href="/login.html" class="btn btn-success nav-link px-4 text-white">Sign in</a>
+                    <a href="{{ route('login') }}" class="btn btn-success nav-link px-4 text-white">Sign in</a>
                 </li>
             </ul>
         </div>
