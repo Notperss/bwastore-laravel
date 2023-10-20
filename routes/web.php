@@ -1,8 +1,12 @@
 <?php
 
-use App\Http\Controllers\Admin\CategoryController;
+use App\Models\User;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +25,8 @@ Route::get('/details/{id?}', [App\Http\Controllers\DetailController::class, 'ind
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart');
 Route::get('/success', [App\Http\Controllers\CartController::class, 'success'])->name('success');
 
-Route::get('/register/success', [App\Http\Controllers\Auth\RegisterController::class, 'success'])->name('register-success');
+Route::get('/register/success', [App\Http\Controllers\Auth\RegisterController::class, 'success'])
+    ->name('register-success');
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
     ->name('dashboard');
@@ -45,11 +50,13 @@ Route::get('/dashboard/account', [App\Http\Controllers\DashboardSettingControlle
 Route::prefix('admin')
     // ->namespace('Admin')
     // ->middleware('auth','admin')
-    ->group(function(){
+    ->group(function () {
 
-    Route::get('/',[App\Http\Controllers\Admin\DashboardController::class,'index'])->name('admin-dashboard');
-    Route::resource('category', CategoryController::class);
-});
+        Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin-dashboard');
+        Route::resource('category', CategoryController::class);
+        Route::resource('user', UserController::class);
+        Route::resource('product', ProductController::class);
+    });
 
 
 Auth::routes();
