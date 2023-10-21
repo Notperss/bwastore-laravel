@@ -10,9 +10,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
-use App\Http\Requests\Admin\ProductRequest;
+use App\Http\Requests\Admin\ProductGalleryRequest;
+use App\Models\ProductGallery;
 
-class ProductController extends Controller
+class ProductGalleryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +22,7 @@ class ProductController extends Controller
     {
         if (request()->ajax()) {
 
-            $query = Product::with(['user', 'category']);
+            $query = ProductGallery::with(['product']);
 
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
@@ -46,7 +47,10 @@ class ProductController extends Controller
                 </div>
                 ';
                 })
-                ->rawColumns(['action'])
+                ->editColumn('photos', function ($item) {
+                    return $item->photos ? '<img src= "' . Storage::url($item->photos) . '"style="max-height:80px"/>' : '';
+                })
+                ->rawColumns(['action', 'photos'])
                 ->make(true);
         }
         return view('pages.admin.product.index');
@@ -65,7 +69,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductRequest $request)
+    public function store(ProductGalleryRequest $request)
     {
         $data = $request->all();
 
@@ -99,7 +103,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProductRequest $request, string $id)
+    public function update(ProductGalleryRequest $request, string $id)
     {
         $data = $request->all();
 
