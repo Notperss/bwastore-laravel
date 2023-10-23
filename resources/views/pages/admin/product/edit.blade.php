@@ -39,7 +39,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Owner Name</label>
-                        <select name="products_id" class="form-control">
+                        <select name="users_id" class="form-control">
                           <option disabled selected> Select Owner</option>
                           @foreach ($users as $user)
                             <option value="{{ $user->id }}" {{ $user->id == $user->id ? 'selected' : '' }}>
