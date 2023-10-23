@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductGalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,8 @@ use App\Http\Controllers\Admin\CategoryController;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/category', [App\Http\Controllers\CategoryController::class, 'index'])->name('categories');
-Route::get('/details/{id?}', [App\Http\Controllers\DetailController::class, 'index'])->name('detail');
+Route::get('/category/{id}', [App\Http\Controllers\CategoryController::class, 'detail'])->name('categories-detail');
+Route::get('/details/{id}', [App\Http\Controllers\DetailController::class, 'index'])->name('detail');
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart');
 Route::get('/success', [App\Http\Controllers\CartController::class, 'success'])->name('success');
 
@@ -56,6 +58,7 @@ Route::prefix('admin')
         Route::resource('category', CategoryController::class);
         Route::resource('user', UserController::class);
         Route::resource('product', ProductController::class);
+        Route::resource('product-gallery', ProductGalleryController::class);
     });
 
 

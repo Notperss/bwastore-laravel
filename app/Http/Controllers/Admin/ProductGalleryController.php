@@ -33,10 +33,7 @@ class ProductGalleryController extends Controller
                             Action
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="' . route('product.edit', $item->id) . '">
-                                Edit
-                            </a>
-                            <form action="' . route('product.destroy', $item->id) . '" method="POST">
+                            <form action="' . route('product-gallery.destroy', $item->id) . '" method="POST">
                                 ' . method_field('delete') . csrf_field() . '
                                 <button type="submit" class="dropdown-item text-danger">
                                     Delete
@@ -53,7 +50,7 @@ class ProductGalleryController extends Controller
                 ->rawColumns(['action', 'photos'])
                 ->make(true);
         }
-        return view('pages.admin.product.index');
+        return view('pages.admin.product-gallery.index');
     }
 
     /**
@@ -61,9 +58,8 @@ class ProductGalleryController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-        $categories = Category::all();
-        return view('pages.admin.product.create', compact('users', 'categories'));
+        $products = Product::all();
+        return view('pages.admin.product-gallery.create', compact('products'));
     }
 
     /**
@@ -73,11 +69,11 @@ class ProductGalleryController extends Controller
     {
         $data = $request->all();
 
-        $data['slug'] = Str::slug($request->name);
+        $data['photos'] = $request->file('photos')->store('assets/product', 'public');
 
-        Product::create($data);
+        ProductGallery::create($data);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product-gallery.index');
     }
 
     /**
@@ -93,10 +89,6 @@ class ProductGalleryController extends Controller
      */
     public function edit(string $id)
     {
-        $item = Product::findOrFail($id);
-        $users = User::all();
-        $categories = Category::all();
-        return view('pages.admin.product.edit', compact('users', 'categories', 'item'));
 
     }
 
@@ -105,19 +97,7 @@ class ProductGalleryController extends Controller
      */
     public function update(ProductGalleryRequest $request, string $id)
     {
-        $data = $request->all();
 
-        $item = Product::findOrFail($id);
-
-        if ($request->password) {
-            $data['password'] = bcrypt($request->password);
-        } else {
-            unset($data['password']);
-        }
-
-        $item->update($data);
-
-        return redirect()->route('product.index');
     }
 
 
@@ -126,11 +106,11 @@ class ProductGalleryController extends Controller
      */
     public function destroy(string $id)
     {
-        $item = Product::findOrFail($id);
+        $item = ProductGallery::findOrFail($id);
 
         $item->delete();
 
-        return redirect()->route('product.index');
+        return redirect()->route('product-gallery.index');
 
     }
 }

@@ -10,7 +10,7 @@ class ProductGallery extends Model
     use HasFactory;
 
     protected $fillable = [
-        'products_id', 'id'];
+        'products_id', 'photos'];
 
     protected $hidden = [
     ];
