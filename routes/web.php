@@ -24,6 +24,8 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/category', [App\Http\Controllers\CategoryController::class, 'index'])->name('categories');
 Route::get('/category/{id}', [App\Http\Controllers\CategoryController::class, 'detail'])->name('categories-detail');
 Route::get('/details/{id}', [App\Http\Controllers\DetailController::class, 'index'])->name('detail');
+Route::post('/details/{id}', [App\Http\Controllers\DetailController::class, 'add'])->name('detail-add');
+
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart');
 Route::get('/success', [App\Http\Controllers\CartController::class, 'success'])->name('success');
 
@@ -53,7 +55,6 @@ Route::prefix('admin')
     // ->namespace('Admin')
     // ->middleware('auth','admin')
     ->group(function () {
-
         Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin-dashboard');
         Route::resource('category', CategoryController::class);
         Route::resource('user', UserController::class);
