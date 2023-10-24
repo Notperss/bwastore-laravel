@@ -31,4 +31,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'midtrans' => [
+        'serverKey' => env('MINDTRANS_SERVER_KEY'),
+        'clientKey' => env('MINDTRANS_CLIENT_KEY'),
+        'isProduction' => env('MINDTRANS_IS_PRODUCTION'),
+        'isSanitized' => env('MINDTRANS_IS_SANITIZED'),
+        'is3ds' => env('MINDTRANS_IS_3DS'),
+    ],
+
 ];
