@@ -105,11 +105,7 @@ class ProductController extends Controller
 
         $item = Product::findOrFail($id);
 
-        if ($request->password) {
-            $data['password'] = bcrypt($request->password);
-        } else {
-            unset($data['password']);
-        }
+        $data['slug'] = Str::slug($request->name);
 
         $item->update($data);
 

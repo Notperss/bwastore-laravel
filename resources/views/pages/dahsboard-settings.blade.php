@@ -14,23 +14,30 @@
       <div class="dashboard-content">
         <div class="row">
           <div class="col-12">
-            <form action="">
+            <form action="{{ route('dashboard-settings-redirect', 'dashboard-settings-store') }}" method="POST"
+              enctype="multipart/form-data">
+              @csrf
               <div class="card">
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group" data-aos="zoom-in" data-aos-delay="100">
                         <label>Nama Toko</label>
-                        <input type="text" class="form-control" />
+                        <input type="text" class="form-control" name="store_name" value="{{ $user->store_name }}" />
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group" data-aos="zoom-in" data-aos-delay="150">
                         <label>Category</label>
-                        <select name="category" id="" class="form-control">
-                          <option value="" disabled>
+                        <select name="categories_id" id="" class="form-control">
+                          <option value="" selected disabled>
                             Select Category
                           </option>
+                          @foreach ($categories as $category)
+                            <option value="{{ $category->id }}"
+                              {{ $category->id == $user->categories_id ? 'selected' : '' }}> {{ $category->name }}
+                            </option>
+                          @endforeach
                         </select>
                       </div>
                     </div>
@@ -41,14 +48,15 @@
                           Apakah saat ini toko Anda buka?
                         </p>
                         <div class="custom-control custom-radio custom-control-inline">
-                          <input type="radio" class="custom-control-input" name="is_store_open" id="openStoreTrue"
-                            value="true" />
+                          <input type="radio" class="custom-control-input" name="store_status" id="openStoreTrue"
+                            value="1" {{ $user->store_status == 1 ? 'checked' : '' }} />
                           <label for="openStoreTrue" class="custom-control-label">Buka
                           </label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                          <input type="radio" class="custom-control-input" name="is_store_open" id="openStoreFalse"
-                            value="false" />
+                          <input type="radio" class="custom-control-input" name="store_status" id="openStoreFalse"
+                            value="0"
+                            {{ $user->store_status == 0 || $user->store_status == null ? 'checked' : '' }} />
                           <label for="openStoreFalse" class="custom-control-label">Sementara Tutup
                           </label>
                         </div>
