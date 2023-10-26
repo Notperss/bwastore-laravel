@@ -238,11 +238,11 @@
 
       data() {
         return {
-          name: "kakff",
-          email: "ada@mail.com",
-          is_store_open: true,
+          name: "",
+          email: "",
+          is_store_open: "",
           store_name: "",
-          email_unavailable: false,
+          email_unavailable: "",
         }
       }
     });

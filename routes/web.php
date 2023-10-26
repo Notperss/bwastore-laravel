@@ -69,6 +69,8 @@ Route::group(['middleware' => ['auth']], function () {
         ->name('dashboard-transaction');
     Route::get('/dashboard/transactions/{id}', [App\Http\Controllers\DashboardTransactionController::class, 'details'])
         ->name('dashboard-transaction-details');
+    Route::post('/dashboard/transactions/{id}', [App\Http\Controllers\DashboardTransactionController::class, 'update'])
+        ->name('dashboard-transaction-update');
 
     Route::get('/dashboard/settings', [App\Http\Controllers\DashboardSettingController::class, 'store'])
         ->name('dashboard-settings-store');
@@ -88,6 +90,7 @@ Route::prefix('admin')
         Route::resource('user', App\Http\Controllers\Admin\UserController::class);
         Route::resource('product', App\Http\Controllers\Admin\ProductController::class);
         Route::resource('product-gallery', App\Http\Controllers\Admin\ProductGalleryController::class);
+        Route::resource('transaction', App\Http\Controllers\Admin\TransactionController::class);
     });
 
 

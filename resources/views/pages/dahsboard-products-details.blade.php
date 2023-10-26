@@ -65,10 +65,11 @@
                         <label>Description</label>
                         <textarea name="description" id="editor">{!! $product->description !!}</textarea>
                       </div>
+                      <button type="button" class="col-2 btn btn-secondary btn-block my-3 ml-4"
+                        onclick="thisFileUpload()">
+                        Add Photo
+                      </button>
                     </div>
-                    <button type="button" class="col-2 btn btn-secondary btn-block my-3 ml-4" onclick="thisFileUpload()">
-                      Add Photo
-                    </button>
                     <div class="card-body">
                       <div class="row">
                         @foreach ($product->galleries as $gallery)
