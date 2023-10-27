@@ -140,12 +140,16 @@
       data: {
         activePhoto: 0,
         photos: [
-          @foreach ($product->galleries as $gallery)
+          @forelse ($product->galleries as $gallery)
             {
               id: {{ $gallery->id }},
               url: "{{ Storage::url($gallery->photos) }}",
             },
-          @endforeach
+          @empty
+            {
+              url: "{{ url('/images/no-image.png') }}",
+            },
+          @endforelse
         ],
       },
       methods: {

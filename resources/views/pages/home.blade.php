@@ -81,7 +81,7 @@
                     style="
                         @if ($product->galleries->count()) background-image:url('{{ Storage::url($product->galleries->first()->photos) }}')
                         @else
-                        background-color: #eee @endif
+                        background-image:url('/images/no-image.png') @endif
                         ">
                   </div>
                 </div>

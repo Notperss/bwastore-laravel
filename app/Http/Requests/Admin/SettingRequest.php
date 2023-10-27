@@ -23,12 +23,12 @@ class SettingRequest extends FormRequest
     public function rules() : array
     {
         return [
-            'name' => [
-                'required', 'string', 'max:254',
-            ],
-            'email' => [
-                'required', 'unique:users,email', Rule::unique('users')->ignore($this->user),
-            ],
+            // 'name' => [
+            //     'required', 'string', 'max:254',
+            // ],
+            // 'email' => [
+            //     'required', 'email', Rule::unique('users')->ignore($this->user()->id, 'id'),
+            // ],
         ];
     }
 }

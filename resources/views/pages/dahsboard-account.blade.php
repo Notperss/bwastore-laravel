@@ -43,6 +43,28 @@
                           value="{{ $user->email }}" />
                       </div>
                     </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Password</label>
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
+                          name="password" placeholder="" autocomplete="new-password">
+                        <small class="text-danger">*kosongkan jika password tidak diganti</small>
+                        @error('password')
+                          <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                          </span>
+                        @enderror
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Password Confirm</label>
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
+                          placeholder="" autocomplete="new-password">
+                        <small class="text-danger">*kosongkan jika password tidak diganti</small>
+                      </div>
+                    </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="address_one">Address 1</label>
@@ -62,7 +84,7 @@
                         <label for="provinces_id">Province</label>
                         <select name="provinces_id" id="provinces_id" class="form-control" v-if="provinces"
                           v-model="provinces_id">
-                          <option v-for="province in provinces" :value="province.id">@{{ province.name }}</option>
+                          <option v-for="province in provinces" :value="province.id">@{{ province.name }} </option>
                         </select>
                         <select v-else class="form-control"></select>
                       </div>
